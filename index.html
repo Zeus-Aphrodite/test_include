@@ -13,7 +13,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/scroll-hint@latest/css/scroll-hint.css">
     <script src="https://unpkg.com/scroll-hint@latest/js/scroll-hint.min.js"></script>
-    <script>
+    <!-- <script>
         // Function to include HTML dynamically
         async function includeHTML() {
             const header = await fetch('header.html').then(res => res.text());
@@ -24,13 +24,33 @@
             document.getElementById('footer').innerHTML = footer;
         }
         document.addEventListener('DOMContentLoaded', includeHTML);
+    </script> -->
+    <script>
+        // Function to include HTML dynamically
+        async function includeHTML() {
+            try {
+                const header = await fetch('header.html');
+                if (!header.ok) throw new Error(`Header fetch failed: ${header.status}`);
+                const main = await fetch('main.html');
+                if (!main.ok) throw new Error(`Main fetch failed: ${main.status}`);
+                const footer = await fetch('footer.html');
+                if (!footer.ok) throw new Error(`Footer fetch failed: ${footer.status}`);
+
+                document.getElementById('header').innerHTML = await header.text();
+                document.getElementById('main').innerHTML = await main.text();
+                document.getElementById('footer').innerHTML = await footer.text();
+            } catch (error) {
+                console.error('Error loading HTML:', error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', includeHTML);
     </script>
 </head>
 
 <body>
-    <div id="header"></div>
-    <div id="main"></div>
-    <div id="footer"></div>
+    <header id="header"></header>
+    <main id="main"></main>
+    <footer id="footer"></footer>
     <script type="text/javascript" src="common.js"></script>
 </body>
 
