@@ -16,9 +16,9 @@
     <script>
         // Function to include HTML dynamically
         async function includeHTML() {
-            // const header = await fetch('header.html').then(res => res.text());
+            const header = await fetch('header.html').then(res => res.text());
             const footer = await fetch('footer.html').then(res => res.text());
-            // document.getElementById('header-placeholder').innerHTML = header;
+            document.getElementById('header-placeholder').innerHTML = header;
             document.getElementById('footer-placeholder').innerHTML = footer;
         }
         document.addEventListener('DOMContentLoaded', includeHTML);
@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <!-- <div class="header-placeholder"></div> -->
+    <div id="header-placeholder"></div>
     <main>
 
 
